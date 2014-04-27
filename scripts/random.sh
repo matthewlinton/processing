@@ -20,6 +20,7 @@
 
 ## FUNCTION DEFINITIONS ####
 
+# Generate a random number between 0 and 1 inclusive (Binary)
 function random_bin {
     case "$1" in
     RANDOM)
@@ -31,6 +32,7 @@ function random_bin {
     esac
 }
 
+# Generate a random number between 0 and 9 inclusive (Decimal)
 function random_dec {
     case "$1" in
     *)
@@ -39,6 +41,7 @@ function random_dec {
     esac
 }
 
+# Generate a random number between 0 and F inclusive (Hexidecimal)
 function random_hex {
     case "$1" in
     *)
@@ -47,6 +50,7 @@ function random_hex {
     esac
 }
 
+# Generate a random number between 0 and 8 inclusive (Octal)
 function random_oct {
     case "$1" in
     *)
@@ -55,6 +59,7 @@ function random_oct {
     esac
 }
 
+# Generate a random character in the US English Alpabet
 function random_char {
     case "$1" in
     *)
@@ -63,6 +68,7 @@ function random_char {
     esac
 }
 
+# Generate a random punctuation mark
 function random_punc {
     case "$1" in
     *)
@@ -71,6 +77,7 @@ function random_punc {
     esac
 }
 
+# Generate a random special character
 function random_spec {
     case "$1" in
     *)
@@ -79,7 +86,9 @@ function random_spec {
     esac
 }
 
-function tast_function {
+# Test one of the above random functions and return information on its
+# effective randomness
+function test_function {
     case "$1" in
     *)
         echo "-1"
@@ -89,9 +98,11 @@ function tast_function {
 
 ## MAIN ####
 
+# Convert input to uppercase
 TYPE="$(echo "$1" | tr '[:lower:]' '[:upper:]')"
 SUBTYPE="$(echo "$2" | tr '[:lower:]' '[:upper:]')"
 
+# Hand off to the correct function
 case "$TYPE" in
     BIN)
         random_bin "$SUBTYPE"
