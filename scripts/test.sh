@@ -3,7 +3,9 @@
 echo "testing"
 echo
 
-while true; do
-    echo "$(($RANDOM % 2))"
-    sleep 1
-done
+echo "${#1}"
+echo "${#2}"
+
+if [ ${#1} -gt 0 ]; then
+    echo "all arguments found"
+fi

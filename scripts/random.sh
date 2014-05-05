@@ -24,9 +24,12 @@
 function random_bin {
     case "$1" in
     RANDOM)
-        echo 1
+        echo '-1'
         ;;
-    *)
+    URANDOM)
+        echo '-1'
+        ;;
+    *)  #SRANDOM
         echo "$(($RANDOM % 2))"
         ;;
     esac
@@ -57,6 +60,22 @@ function random_oct {
         printf '%o' $(($RANDOM % 8))
         ;;
     esac
+}
+
+# Generate a random number within a range 
+# USAGE random_range TYPE MIN MAX
+function random_range {
+    if [ ${#2} -gt 0 ] || [ ${#3} -gt 0 ] || [ $2 -lt $3 ]; then
+        let "RANGE=($3 - $2) + 1"
+        case $1 in
+        *)  #SRANDOM
+            let "VALUE=($RANDOM % $RANGE) + $2"
+            ;;
+        esac
+    else
+        echo "-1"
+    fi 
+    echo "$VALUE"
 }
 
 # Generate a random character in the US English Alpabet
@@ -116,11 +135,14 @@ case "$TYPE" in
     HEX)
         random_hex "$SUBTYPE"
         ;;
+    RANGE)
+        random_range "$SUBTYPE" $3 $4
+        ;;
     CHAR)
         random_char "$SUBTYPE"
         ;;
     TEST)
-        test_function $2
+        test_function "$@"
         ;;
     *)
         echo "Unrecognized type \"$1\"."
