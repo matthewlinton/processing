@@ -2,6 +2,8 @@
 
 Keep your terminal busy with a constant stream of output.
 
+This project has moved to : https://bitbucket.org/matthewlinton/terminalprocessing
+
 ## Download
 
 * Checkout: `git clone https://github.com/matthewlinton/processing.git`
